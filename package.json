@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "cors": "^2.8.6",
+    "papaparse": "^5.5.3"
+  }
+}

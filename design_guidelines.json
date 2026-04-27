@@ -1,0 +1,137 @@
+{
+  "project_name": "DISCCART",
+  "domain": "E-commerce & Deal Discovery Platform",
+  "theme": "Light",
+  "archetype": "Archetype 6 (Vibrant Play) mixed with Archetype 1 (Organic & Earthy)",
+  "vibe": "High energy, fast-paced, high-conversion, trustworthy.",
+  "design_philosophy": {
+    "emotion_first": "Every deal should feel like an exclusive, time-sensitive win.",
+    "zoom_in": "Focus heavily on the discount percentage and the brand logo. These are the main conversion drivers.",
+    "negative_space": "Use generous padding around deals so they don't look like spammy coupon sites.",
+    "contrast": "Vibrant Orange and Deep Green against crisp white cards and soft gray backgrounds."
+  },
+  "colors": {
+    "background": {
+      "default": "#FAFAFA",
+      "card": "#FFFFFF",
+      "overlay": "rgba(0, 0, 0, 0.6)"
+    },
+    "primary": {
+      "DEFAULT": "#FF8C00",
+      "hover": "#E67E00",
+      "foreground": "#FFFFFF"
+    },
+    "secondary": {
+      "DEFAULT": "#228B22",
+      "hover": "#1D771D",
+      "foreground": "#FFFFFF"
+    },
+    "text": {
+      "primary": "#0A0A0A",
+      "secondary": "#4B5563",
+      "muted": "#9CA3AF"
+    },
+    "borders": {
+      "default": "#E5E7EB",
+      "focus": "#FF8C00",
+      "dashed": "rgba(255, 140, 0, 0.4)"
+    },
+    "status": {
+      "success": "#228B22",
+      "warning": "#F59E0B",
+      "error": "#EF4444"
+    }
+  },
+  "typography": {
+    "primary_font": "Outfit",
+    "secondary_font": "Manrope",
+    "scale": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tighter font-black",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight font-bold",
+      "h3": "text-xl sm:text-2xl tracking-tight font-semibold",
+      "h4": "text-lg sm:text-xl font-semibold",
+      "body_large": "text-lg leading-relaxed font-medium",
+      "body": "text-base leading-relaxed font-medium",
+      "small": "text-sm font-medium",
+      "label": "text-xs tracking-[0.2em] uppercase font-bold text-gray-500"
+    },
+    "rules": [
+      "No Inter or generic sans for headings.",
+      "Discount percentages MUST use the highest font weight (font-black) and tightest tracking.",
+      "Use 'Outfit' for all numeric figures and prices for high legibility and modern tech feel.",
+      "Uppercase tracking for overlines like 'EXPIRES SOON'."
+    ]
+  },
+  "spacing_and_layout": {
+    "generous_spacing": true,
+    "scale": ["p-4", "p-6", "p-8", "p-12", "p-16", "p-24"],
+    "grids": {
+      "desktop_deals": "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6",
+      "admin_dashboard": "grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6",
+      "category_pills": "flex gap-3 overflow-x-auto pb-4 hide-scrollbar"
+    },
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "mobile_nav": "fixed bottom-0 left-0 right-0 h-16 bg-white/80 backdrop-blur-xl border-t border-gray-200 z-50 flex justify-around items-center px-2 pb-safe"
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-[#FF8C00] hover:bg-[#E67E00] text-white font-bold rounded-xl px-6 py-3 transition-transform active:scale-95 shadow-[0_4px_14px_0_rgba(255,140,0,0.39)] hover:shadow-[0_6px_20px_rgba(255,140,0,0.23)]",
+      "secondary": "bg-[#228B22] hover:bg-[#1D771D] text-white font-bold rounded-xl px-6 py-3 transition-all",
+      "outline": "border-2 border-gray-200 hover:border-[#FF8C00] text-gray-900 bg-transparent rounded-xl px-6 py-3 transition-colors",
+      "reveal_coupon": "relative overflow-hidden bg-gradient-to-r from-[#FF8C00] to-[#E67E00] text-white font-bold rounded-xl px-6 py-4 w-full group"
+    },
+    "cards": {
+      "deal_card": "bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col relative overflow-hidden group p-4",
+      "coupon_card": "bg-white rounded-2xl border-2 border-dashed border-[#FF8C00]/40 p-6 relative flex flex-col items-center justify-center text-center",
+      "admin_widget": "bg-white rounded-xl border border-gray-200 p-6"
+    },
+    "inputs": {
+      "default": "border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#FF8C00] focus:border-transparent outline-none w-full text-base",
+      "search": "border-0 bg-gray-100 rounded-full px-6 py-4 focus:ring-2 focus:ring-[#FF8C00] outline-none w-full text-lg"
+    },
+    "micro_interactions": {
+      "hover": "Subtle Y-axis translation (-translate-y-1) and shadow increase.",
+      "active": "Scale down to 0.98 for satisfying physical press feel.",
+      "popup": "Backdrop blur with scale-in animation (Framer Motion: initial={scale: 0.9, opacity: 0}, animate={scale: 1, opacity: 1})."
+    },
+    "navigation": {
+      "header": "sticky top-0 z-40 w-full bg-white/80 backdrop-blur-xl border-b border-gray-100 h-20 flex items-center",
+      "bottom_nav_mobile": "visible md:hidden fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-t border-gray-200 pb-[env(safe-area-inset-bottom)]"
+    }
+  },
+  "icons_and_assets": {
+    "library": "lucide-react",
+    "style": "stroke-2, consistent sizing (w-5 h-5 for inline, w-6 h-6 for mobile nav, w-8 h-8 for empty states)"
+  },
+  "accessibility": {
+    "contrast": "Ensure white text on #FF8C00 and #228B22 meets 4.5:1 ratio or use bold font weights.",
+    "focus": "All interactive elements MUST have focus-visible:ring-2 focus-visible:ring-[#FF8C00] focus-visible:ring-offset-2",
+    "testing": "Apply data-testid to all buttons, links, and forms."
+  },
+  "media": {
+    "design_asset": {
+      "description": "Provided User Asset (Logo/Reference)",
+      "url": "https://customer-assets.emergentagent.com/job_4782f2ef-8614-4604-843b-cc10ee1e98da/artifacts/a891hwo3_IMG_2239.png",
+      "usage": "Use in header or as primary brand reference."
+    },
+    "categories": {
+      "electronics": "https://images.unsplash.com/photo-1595284842888-519573d8fb7b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzR8MHwxfHNlYXJjaHwzfHxlbGVjdHJvbmljcyUyMGdhZGdldHMlMjBjbGVhbiUyMGZsYXRsYXl8ZW58MHx8fHwxNzc0Njk3NDg1fDA&ixlib=rb-4.1.0&q=85",
+      "fashion": "https://images.pexels.com/photos/7679655/pexels-photo-7679655.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "food": "https://images.pexels.com/photos/4440858/pexels-photo-4440858.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "travel": "https://images.pexels.com/photos/8216324/pexels-photo-8216324.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    },
+    "brands": {
+      "amazon": "https://images.unsplash.com/photo-1704204656144-3dd12c110dd8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzN8MHwxfHNlYXJjaHwxfHxhbWF6b24lMjBsb2dvfGVufDB8fHx8MTc3NDY5NzQ5Nnww&ixlib=rb-4.1.0&q=85",
+      "myntra": "https://images.unsplash.com/photo-1526632503813-6f479409d7bf?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODl8MHwxfHNlYXJjaHwyfHxmYXNoaW9uJTIwc3R5bGlzaCUyMGNsb3RoaW5nfGVufDB8fHx8MTc3NDY5NzQ4N3ww&ixlib=rb-4.1.0&q=85"
+    }
+  },
+  "instructions_to_main_agent": [
+    "Install custom fonts: @fontsource/outfit and @fontsource/manrope.",
+    "Use framer-motion for the 'Reveal Coupon' popup. It needs an attention-grabbing scale-in effect with backdrop-blur-xl.",
+    "Implement the Bottom Navigation Bar for mobile views (hidden on md+ screens) mimicking IG viral UI flow.",
+    "For the 'Deal Card', ensure the discount amount is the largest text element using Outfit font-black.",
+    "In the Admin dashboard, use Shadcn Table for deals and ensure there's a distinct button for 'Bulk CSV Upload'.",
+    "Never use generic placeholders. Map the provided URLs to the correct category cards.",
+    "Implement 'Copy to Clipboard' on the popup with a success state changing the button color to Green (#228B22)."
+  ]
+}

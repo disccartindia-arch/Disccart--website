@@ -1,0 +1,76 @@
+/* Custom styles for DISCCART */
+.App {
+  min-height: 100vh;
+}
+
+/* Line clamp utilities */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Active scale on buttons */
+.active\:scale-98:active {
+  transform: scale(0.98);
+}
+
+/* Coupon code styling */
+code {
+  font-family: 'Outfit', ui-monospace, monospace;
+}
+
+/* Custom selection color */
+::selection {
+  background-color: rgba(255, 140, 0, 0.3);
+  color: inherit;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* iOS safe area for bottom nav */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .pb-safe {
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+  }
+}
+
+
+/* Hero section floating animations */
+@keyframes hero-float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(3deg); }
+}
+
+@keyframes hero-float-medium {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(-2deg); }
+}
+
+@keyframes hero-float-reverse {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(10px) rotate(2deg); }
+}
+
+.hero-float-slow {
+  animation: hero-float-slow 8s ease-in-out infinite;
+}
+
+.hero-float-medium {
+  animation: hero-float-medium 6s ease-in-out infinite;
+}
+
+.hero-float-reverse {
+  animation: hero-float-reverse 7s ease-in-out infinite;
+}

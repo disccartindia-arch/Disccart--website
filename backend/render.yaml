@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: disccart-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: MONGO_URL
+        sync: false
+      - key: DB_NAME
+        value: disccart_db
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: https://disccart.in,https://www.disccart.in,https://disccart-frontend.vercel.app
+      - key: ADMIN_EMAIL
+        value: disccartindia@gmail.com
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: RATE_LIMIT_REQUESTS
+        value: "100"
+      - key: RATE_LIMIT_WINDOW
+        value: "60"
+      - key: SITE_URL
+        value: https://disccart.in
