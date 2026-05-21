@@ -21,6 +21,9 @@ import shutil
 import cloudinary
 import cloudinary.uploader
 from dotenv import load_dotenv
+from deal_engine import deal_engine_router
+import deal_engine
+
 
 # ===================== SETUP =====================
 load_dotenv()
@@ -1663,7 +1666,13 @@ async def search_suggestions(q: str = ""):
     cache.set(cache_key, result, 120)
     return result
 
+
+# Setup deal engine dependencies
+deal_engine.db = db
+deal_engine.admin_required = admin_required
+api_router.include_router(deal_engine_router, prefix="/deal-engine", tags=["Deal Engine"])
 app.include_router(api_router, prefix="/api")
+
 
 os.makedirs("uploads", exist_ok=True)
 app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
