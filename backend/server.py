@@ -7,6 +7,7 @@ from pydantic import BaseModel, EmailStr, validator
 from typing import List, Optional
 from datetime import datetime, timezone, timedelta
 from bson import ObjectId
+from pymongo import UpdateOne
 import os
 import logging
 import csv
@@ -902,23 +903,31 @@ async def update_filter_config(request: Request):
 
     # Update category show_in_filter flags
     cat_updates = data.get("categories", [])
-    for cat in cat_updates:
-        cid = cat.get("id")
-        if cid:
-            await db.categories.update_one(
-                {"_id": ObjectId(cid)},
-                {"$set": {"show_in_filter": cat.get("show_in_filter", True)}}
-            )
+    if cat_updates:
+        cat_bulk_ops = []
+        for cat in cat_updates:
+            cid = cat.get("id")
+            if cid:
+                cat_bulk_ops.append(UpdateOne(
+                    {"_id": ObjectId(cid)},
+                    {"$set": {"show_in_filter": cat.get("show_in_filter", True)}}
+                ))
+        if cat_bulk_ops:
+            await db.categories.bulk_write(cat_bulk_ops)
 
     # Update store show_in_filter flags
     store_updates = data.get("stores", [])
-    for store in store_updates:
-        sid = store.get("id")
-        if sid:
-            await db.stores.update_one(
-                {"_id": ObjectId(sid)},
-                {"$set": {"show_in_filter": store.get("show_in_filter", True)}}
-            )
+    if store_updates:
+        store_bulk_ops = []
+        for store in store_updates:
+            sid = store.get("id")
+            if sid:
+                store_bulk_ops.append(UpdateOne(
+                    {"_id": ObjectId(sid)},
+                    {"$set": {"show_in_filter": store.get("show_in_filter", True)}}
+                ))
+        if store_bulk_ops:
+            await db.stores.bulk_write(store_bulk_ops)
 
     cache.invalidate("filter", "categories", "stores")
     return {"status": "updated"}
