@@ -93,6 +93,14 @@ class TestPopupEndpoints:
         assert updated_popup.get("clicks", 0) >= initial_clicks, "Click count should have increased"
         print(f"✓ POST /api/popups/{popup_id}/click - click tracking works")
 
+    def test_popup_click_tracking_invalid_id(self):
+        """POST /api/popups/{id}/click with invalid ID returns 200"""
+        invalid_id = "invalid_id_format"
+        response = self.session.post(f"{BASE_URL}/api/popups/{invalid_id}/click")
+        assert response.status_code == 200, f"Expected 200, got {response.status_code}"
+        assert response.json().get("status") == "ok"
+        print(f"✓ POST /api/popups/{invalid_id}/click - handles invalid ID correctly")
+
 
 class TestAdminPopupEndpoints:
     """Test admin popup CRUD endpoints with authentication"""
