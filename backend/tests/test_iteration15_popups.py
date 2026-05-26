@@ -67,6 +67,13 @@ class TestPopupEndpoints:
         assert updated_popup is not None
         assert updated_popup.get("views", 0) >= initial_views, "View count should have increased"
         print(f"✓ POST /api/popups/{popup_id}/view - view tracking works")
+
+    def test_popup_view_tracking_invalid_id(self):
+        """POST /api/popups/{invalid_id}/view ignores exception and returns 200 ok"""
+        view_response = self.session.post(f"{BASE_URL}/api/popups/invalid_id/view")
+        assert view_response.status_code == 200, f"Expected 200, got {view_response.status_code}"
+        assert view_response.json().get("status") == "ok"
+        print("✓ POST /api/popups/invalid_id/view - returns 200 ok")
     
     def test_popup_click_tracking(self):
         """POST /api/popups/{id}/click increments click count"""
