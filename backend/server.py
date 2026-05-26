@@ -185,8 +185,8 @@ class CouponCreate(BaseModel):
     brand_name: str
     category_name: str
     code: Optional[str] = None
-    original_price: Optional[int] = None
-    discounted_price: Optional[int] = None
+    original_price: Optional[float] = None
+    discounted_price: Optional[float] = None
     affiliate_url: str
     discount_type: str = "percentage"
     discount_value: float = 0
@@ -195,6 +195,12 @@ class CouponCreate(BaseModel):
     image_url: Optional[str] = None
     description: Optional[str] = None
     expires_at: Optional[str] = None
+
+    @validator('original_price', 'discounted_price', pre=True, always=True)
+    def normalize_prices(cls, v):
+        if v == '' or v == 0 or v == 0.0:
+            return None
+        return v
 
     @validator('affiliate_url')
     def validate_url(cls, v):
@@ -207,8 +213,8 @@ class CouponUpdate(BaseModel):
     title: str
     brand_name: str
     category_name: str
-    original_price: Optional[int] = None
-    discounted_price: Optional[int] = None
+    original_price: Optional[float] = None
+    discounted_price: Optional[float] = None
     affiliate_url: str
     image_url: Optional[str] = ""
     code: Optional[str] = None
@@ -218,6 +224,12 @@ class CouponUpdate(BaseModel):
     expires_at: Optional[str] = None
     discount_type: str = "percentage"
     discount_value: float = 0
+
+    @validator('original_price', 'discounted_price', pre=True, always=True)
+    def normalize_prices(cls, v):
+        if v == '' or v == 0 or v == 0.0:
+            return None
+        return v
 
 # ===================== AUTH UTILS =====================
 
