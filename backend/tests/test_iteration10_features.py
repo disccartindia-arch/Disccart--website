@@ -442,6 +442,30 @@ class TestCloudinaryUpload:
         assert response.status_code == 422
         print("SUCCESS: Upload endpoint correctly requires image file")
 
+    def test_upload_invalid_type(self):
+        """POST /api/upload-image should reject invalid file types (e.g. text/plain)"""
+        # We will use fastapi.testclient because setting env vars for the external process
+        # doesn't reliably configure the running test server on preview environments.
+        from fastapi.testclient import TestClient
+        from server import app
+        import server
+
+        client = TestClient(app)
+
+        import io
+        text_data = b'This is a plain text file, not an image.'
+        files = {'image': ('test.txt', io.BytesIO(text_data), 'text/plain')}
+
+        # The backend uses a global `_api_key` to check cloudinary config
+        # We set it directly to bypass the 500 error for missing configuration
+        server._api_key = "dummy"
+
+        response = client.post("/api/upload-image", files=files)
+
+        assert response.status_code == 400
+        assert "Invalid file type" in response.text
+        print("SUCCESS: Upload endpoint correctly rejects invalid file type")
+
 
 class TestCategoriesAPI:
     """Tests for Categories API with show_in_filter"""
