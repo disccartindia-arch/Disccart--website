@@ -167,7 +167,8 @@ class TestCouponPriceNullHandling:
         
         # Verify by fetching coupons
         get_response = requests.get(f"{BASE_URL}/api/coupons", params={"isAdmin": True})
-        coupons = get_response.json()
+        coupons_response = get_response.json()
+        coupons = coupons_response.get('deals', coupons_response)
         test_coupon = next((c for c in coupons if c['id'] == coupon_id), None)
         
         assert test_coupon is not None, "Created coupon not found"
@@ -211,7 +212,8 @@ class TestCouponPriceNullHandling:
         
         # Verify prices saved correctly
         get_response = requests.get(f"{BASE_URL}/api/coupons", params={"isAdmin": True})
-        coupons = get_response.json()
+        coupons_response = get_response.json()
+        coupons = coupons_response.get('deals', coupons_response)
         test_coupon = next((c for c in coupons if c['id'] == coupon_id), None)
         
         assert test_coupon is not None
@@ -245,8 +247,15 @@ class TestExistingFeaturesStillWork:
         response = requests.get(f"{BASE_URL}/api/coupons")
         assert response.status_code == 200
         data = response.json()
-        assert isinstance(data, list), "Should return list"
-        print(f"✓ GET /api/coupons returns {len(data)} coupons")
+
+        # Depending on API return format, might be a dict with 'deals' or a direct list
+        if isinstance(data, dict) and 'deals' in data:
+            deals = data['deals']
+        else:
+            deals = data
+
+        assert isinstance(deals, list), "Should return list"
+        print(f"✓ GET /api/coupons returns {len(deals)} coupons")
     
     def test_get_categories_works(self):
         """GET /api/categories should return list with coupon_count"""
